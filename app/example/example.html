@@ -1,0 +1,145 @@
+<div ng-controller="ExampleCtrl as vm" ng-init="vm.init();">
+
+    <div class="container-fluid" style="margin-top: 30px;padding:20px;">
+        <div class="row">
+                <div class="col-md-12">
+                        <a style="color: #666;" data-automation="apply-now-button" class="btn apply-btn btn-link-ref btn-default" data-i18n="Opportunity.OpportunityDetail.Apply"><i class="fa fa-th-list"></i> Search Results</a>
+                        <a class="btn btn-sm pull-right" id="b" style="background-color: #1b95e0; color: #fff;"><i class="fa fa-twitter"></i>&nbsp;<span class="label" id="l">Tweet</span></a>
+                </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-8"><h2 class="heading-with-subtitle">
+                    <span data-bind="text: formattedTitle" data-automation="opportunity-title">PAYMENT SERVICES  SPECIALIST; RISING STARS</span>
+                    <!-- <span data-automation="featured-label" class="label label-sm label-featured label-job-board" data-bind="visible: $parent.shouldShowFeaturedLabel()" data-i18n="Opportunity.Opportunities.Featured"></span> -->
+                    <!-- ko if: $parent.shouldShowFeaturedLabel() --><!-- /ko -->
+                </h2></div>
+            <div class="col-md-4">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                    <div class="label-with-icon-group paragraph">
+                            <span class="label-with-icon" data-bind="tooltip: { title : $.t('Opportunity.OpportunityDetail.JobCategory'), placement: 'top'}" data-original-title="" title="" aria-describedby="tooltip884866">
+                                <i class="fa fa-building-o muted" aria-hidden="true"></i><span data-bind="text: JobCategoryName()" data-automation="job-category">&nbsp; Support Services</span>
+                            </span><div class="tooltip fade top in" role="tooltip" id="tooltip884866" style="top: 38.1px; left: 37.3563px; display: block;"><div class="tooltip-arrow" style="left: 50%;"></div><div class="tooltip-inner">Job Category</div></div>
+                             &nbsp;   <!-- ko if: SupervisorName() !== null --><!-- /ko -->
+                            <span class="label-with-icon" data-bind="tooltip: { title : $.t('Opportunity.OpportunityDetail.RequisitionNumber'), placement: 'top'}" data-original-title="" title="">
+                                <i class="fa fa-bookmark-o muted" aria-hidden="true"></i><span data-bind="text: RequisitionNumber()" data-automation="requisition-number">&nbsp; SUPPO04080</span>
+                            </span>
+                        </div>
+            </div>
+            <div class="col-md-4">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-9">
+                    <div class="job-banner-right text-right">
+                            <h2>
+                                <span class="form-group">
+                                        <a style="color: #fff;" class="btn btn-primary linkedin-apply-btn btn-link-ref" data-automation="linkedin-apply" data-bind="click: US.CurrentOpportunityDetailViewModel.authenticateWithLinkedIn">
+                                            <i class="fa fa-linkedin-square fa-lg linkedin-icon"></i> <span data-i18n="Opportunity.OpportunityDetail.ApplyWithLinkedIn">Apply with LinkedIn</span>
+                                        </a>
+                                    <a style="color: #fff;" data-automation="apply-now-button" class="btn btn-primary apply-btn btn-link-ref btn-success" data-i18n="Opportunity.OpportunityDetail.Apply">Apply now</a>
+                                    <a ng-click="vm.referThem();" style="color: #fff;"  class="btn apply-btn btn-link-ref btn-info">
+                                            <i class="fa fa-send"></i> Refer a friend</a>
+                                </span>
+                            </h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-3">
+                        <ul class="opportunity-sidebar list-unstyled">
+                            
+                            <li>
+                                <ul class="list-unstyled">
+                                    <!-- ko if: PostedDate() -->
+                                    <li>
+                                        <span data-bind="text: $.t('Opportunity.OpportunityDetail.PostedLabel')">Posted</span>:
+                                        <span data-automation="job-posted-date" data-bind="text: moment.utc($parent.jobBoardSpecificPostedDate()).local().format('LL')">December 11, 2017</span>
+                                    </li>
+                                    <!-- /ko -->
+                                    <!-- ko if: !isPublished() --><!-- /ko -->
+                                </ul>
+                            </li>
+            
+                            
+                            <li>
+                                <span id="JobFullTime" data-automation="JobFullTime" data-bind="text: $.t('Opportunity.OpportunityDetail.FullTime', {context:FullTime().toString()})">Full-Time</span>
+                            </li>
+            
+                            
+                            <!-- ko if: CompensationAmount != null &&  CompensationAmount.Value() != null --><!-- /ko -->
+                            
+                            <!-- ko if: Locations().length > 0 -->
+                            <li style="border-bottom-color: transparent;">
+                                <div data-automation="opportunity-physical-locations">
+                                    <!-- ko foreach: Locations() -->
+                                    <div data-bind="visible: $index() == 0 &amp;&amp; $parent.showAllLocations() == false">
+                                        <candidate-physical-location params="{bindingContext: $data}" data-automation="physical-location-item"><address id="Preview" data-automation="physical-location"><span data-bind="visible: (LocalizedName() &amp;&amp; DisplayName()) || (LocalizedLocationId() &amp;&amp; DisplayLocationId())" style="display: none;"><span data-bind="text: localizedNameAndLocationId()" data-automation="name-and-location-id-label"></span><br></span><span data-bind="visible: Address().Line1() &amp;&amp; DisplayStreetAddress()" style="display: none;"><span data-bind="text: Address().Line1" data-automation="address-line1-label"></span><br></span><span data-bind="visible: Address().Line2() &amp;&amp; DisplayStreetAddress()" style="display: none;"><span data-bind="text: Address().Line2" data-automation="address-line2-label"></span><br></span><span data-bind="visible: Address().CityStatePostalCodeAndCountry() &amp;&amp; DisplayAddress()"><span data-bind="text: Address().CityStatePostalCodeAndCountry()" data-automation="city-state-zip-country-label">Santa Ana, CA, USA</span><br></span></address></candidate-physical-location>
+                                    </div>
+                                    <div data-bind="visible: $parent.showAllLocations" style="display: none;">
+                                        <candidate-physical-location params="{bindingContext: $data}" data-automation="physical-location-item"><address id="Preview" data-automation="physical-location"><span data-bind="visible: (LocalizedName() &amp;&amp; DisplayName()) || (LocalizedLocationId() &amp;&amp; DisplayLocationId())" style="display: none;"><span data-bind="text: localizedNameAndLocationId()" data-automation="name-and-location-id-label"></span><br></span><span data-bind="visible: Address().Line1() &amp;&amp; DisplayStreetAddress()" style="display: none;"><span data-bind="text: Address().Line1" data-automation="address-line1-label"></span><br></span><span data-bind="visible: Address().Line2() &amp;&amp; DisplayStreetAddress()" style="display: none;"><span data-bind="text: Address().Line2" data-automation="address-line2-label"></span><br></span><span data-bind="visible: Address().CityStatePostalCodeAndCountry() &amp;&amp; DisplayAddress()"><span data-bind="text: Address().CityStatePostalCodeAndCountry()" data-automation="city-state-zip-country-label">Santa Ana, CA, USA</span><br></span></address></candidate-physical-location>
+                                    </div>
+                                    <!-- /ko -->
+                                    <a data-automation="job-location-more" data-bind="visible: Locations().length > 1 &amp;&amp; showAllLocations() == false, text: $.t('Opportunity.Opportunities.MoreLocations', { count : Locations().length - 1 }), click: function(){showAllLocations(true)}" style="display: none;">+0 more</a>
+                                    <a data-automation="job-location-less" data-bind="visible: Locations().length > 1 &amp;&amp; showAllLocations() == true, text: $.t('Opportunity.Opportunities.Less'), click: function(){showAllLocations(false)}" style="display: none;">less</a>
+                                </div>
+                            </li>
+                            <!-- /ko -->
+            
+                        <!-- ko if: TravelRequired() !== null --><!-- /ko -->
+                            <!-- ko if: Links().length --><!-- /ko -->
+                        </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                                <h2 class="my-0" data-automation="jog-details-title" data-bind="text: $.t('Opportunity.OpportunityDetail.JobDetails')">Job Details</h2>
+                        </div>
+                        <div class="col-md-12">
+                                <h3 data-automation="descriptions-title" data-bind="text: $.t('Opportunity.OpportunityDetail.Description')">Description</h3>
+                        </div>
+                        <div class="col-md-12">
+                                <p class="opportunity-description" data-automation="job-description" data-bind="html: Description"><p>A fully paid training program, called Rising Stars will prepare you to become a Payment Services Specialist in the growing field of Human Capital Management.</p>
+                                <p>Here at Ultimate Software, we truly put our people first. We strongly believe in teamwork, and we encourage and trust our people to reach higher, learn more, and live up to their potential. Ultimate is ranked #1 on Fortune's “Best Places to Work in Technology” for 2017 and #7 on the “100 Best Companies to Work For” list in 2017. Ultimate is also ranked #1 on the Fortune’s “100 Best Workplaces for Millennials” for 2017 and #3 on its&nbsp; "Best Workplaces for Diversity” list for 2017.</p>
+                                <p><a href="https://youtu.be/1Y4XXbaLQYo" target="_blank" rel="noopener noreferrer">https://youtu.be/1Y4XXbaLQYo</a></p>
+                                <p>Within the Payment Services department, you are part of a team of professionals that play a key role providing in-depth analysis and timely resolutions/workarounds for client issues. This position requires strong analytical, communication and problem-solving skills. Many with banking, mortgage, escrow and insurance backgrounds have found this to a rewarding career transition.&nbsp;</p>
+                                <p><em>&nbsp;</em></p>
+                                <p><strong>Essential Duties and Responsibilities</strong><strong>: </strong>(other duties may be assigned)</p>
+                                <ul>
+                                <li>Execute Payroll related transaction processes in a timely and accurate manner.</li>
+                                <li>Record transactions processed after receiving confirmation of completion</li>
+                                <li>Research and resolve issues related to transactions</li>
+                                <li>Assist internal and external customers with questions related to transactions</li>
+                                <li>Adhere to Audit Controls as related to transactions</li>
+                                </ul>
+                                <p><strong>Required Qualifications/Skills</strong><strong>: </strong></p>
+                                <ul>
+                                <li>Highly motivated and team oriented</li>
+                                <li>Must be able to manage in an organized, proactive and independent manner to meet all required time frames and commitments in a high volume environment to meet all required time frames and commitments</li>
+                                <li>Proficiency with Microsoft Office applications: Word, and Excel</li>
+                                <li>Extremely detail oriented with a passion for doing tasks right the first time and handling multiple priorities simultaneously</li>
+                                <li>Strong oral and written communication skills</li>
+                                <li>Passion for customer excellence in customer service and the ability to work in a fast paced environment</li>
+                                </ul>
+                                <p><strong>Preferred Qualifications/Skills</strong><strong>:</strong></p>
+                                <ul>
+                                <li>Experience working with Payroll and Tax is a plus</li>
+                                <li>Experience with accounting and/or banking processes</li>
+                                </ul>
+                                <p><strong>Education/Certification/License</strong><strong>:</strong></p>
+                                <ul>
+                                <li>BA in Business, Accounting, Computer Science preferred or a related field or equivalent work experience will be considered</li>
+                                </ul>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>This job description has been written to include the general nature of work performed. It is not designed to contain a comprehensive detailed inventory of all duties, responsibilities and qualifications required of employees assigned to this job.</p></p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
